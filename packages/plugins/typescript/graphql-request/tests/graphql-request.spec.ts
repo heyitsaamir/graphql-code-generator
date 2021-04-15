@@ -87,7 +87,9 @@ async function test() {
 }`;
       const output = await validate(result, config, docs, schema, usage);
 
-      expect(result.content).toContain(`(FeedDocument, variables, requestHeaders));`);
+      expect(result.content).toContain(`(FeedDocument, variables, requestHeaders), 'feed');`);
+      expect(result.content).toContain(`(Feed3Document, variables, requestHeaders), 'feed3');`);
+      expect(result.content).toContain(`(Feed4Document, variables, requestHeaders), 'feed4');`);
       expect(output).toMatchSnapshot();
     });
 
@@ -216,9 +218,9 @@ async function test() {
       const output = await validate(result, config, docs, schema, '');
 
       expect(output).toContain(`import * as Operations from './operations';`);
-      expect(output).toContain(`(Operations.FeedDocument, variables, requestHeaders));`);
-      expect(output).toContain(`(Operations.Feed2Document, variables, requestHeaders));`);
-      expect(output).toContain(`(Operations.Feed3Document, variables, requestHeaders));`);
+      expect(output).toContain(`(Operations.FeedDocument, variables, requestHeaders), 'feed');`);
+      expect(output).toContain(`(Operations.Feed2Document, variables, requestHeaders), 'feed2');`);
+      expect(output).toContain(`(Operations.Feed3Document, variables, requestHeaders), 'feed3');`);
     });
   });
 });
